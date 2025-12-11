@@ -1,0 +1,38 @@
+#!/bin/sh
+
+_rofi () {
+    rofi -dmenu -i -no-levenshtein-sort "$@"
+}
+
+get_user_sv () {
+	echo "$(ls "$SVDIR")"
+}
+
+actions () {
+	local service="$1"
+    action="$(printf '%s\n' Start Stop Restart | _rofi -p 'Select action:' )" || return 0
+
+	case "$action" in
+		Start)    sv_subcommand=start ;;
+		Stop)     sv_subcommand=stop ;;
+		Restart)  sv_subcommand=restart ;;
+		'')       return 0 ;;
+		*)        notify-send "Invalid selection" && return 1 ;;
+	esac
+
+    if sv "$sv_subcommand" "$service"; then
+        notify-send "Success"
+    else
+        notify-send "Fail"
+    fi
+}
+
+main () {
+	local selected_sv="$(get_user_sv | _rofi -p 'Select service: ')"
+	if [ "$selected_sv" = "" ]; then
+		exit 0
+	fi
+	actions "$selected_sv"
+}
+
+main
