@@ -1,0 +1,11 @@
+#!/bin/sh
+
+current=$(copyq eval 'monitoring()')
+
+if [ "$current" = "true" ]; then
+	copyq disable && notify-send "Clipboard history disabled"
+else if [ "$current" = "false" ]; then
+	copyq enable && notify-send "Clipboard history enabled"
+fi
+fi
+
