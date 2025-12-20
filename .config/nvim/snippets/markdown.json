@@ -1,0 +1,23 @@
+{
+	"img": {
+		"prefix": ["img"],
+		"body": ["![$2]($1)"],
+		"description": "Simple template for image"
+	},
+	"imghtml": {
+		"prefix": ["imghtml"],
+		"body": ["<img src='$1'>"],
+		"description": "Simple template for image"
+	},
+
+	"table": {
+		"prefix": ["table"],
+		"body": ["|Col|Col|\n--- | ---\nRow | Row\nRow | Row"],
+		"description": "Simple template for table"
+	},
+	"li": {
+		"prefix": ["li"],
+		"body": ["* [ ] $1"],
+		"description": "List item"
+	}
+}
